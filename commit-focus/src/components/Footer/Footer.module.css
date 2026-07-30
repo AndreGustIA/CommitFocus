@@ -1,0 +1,25 @@
+.containerFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.restantesFooter {
+  color: var(--cor-letra-secundaria);
+  font-family: var(--fonte-principal);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: var(--espaco-entre-texto);
+}
+
+.iconeFooter {
+  color: var(--cor-icones);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--bordas-arredondadas);
+
+  &:hover {
+    background-color: var(--cor-bg-hover-icone);
+  }
+}

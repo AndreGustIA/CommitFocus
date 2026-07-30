@@ -16,7 +16,7 @@
   button {
     border: none;
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: var(--bordas-arredondadas);
 
     &:hover {
       cursor: pointer;
