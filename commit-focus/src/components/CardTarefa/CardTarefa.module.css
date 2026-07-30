@@ -1,0 +1,79 @@
+.containerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  padding: 0 15px;
+  background-color: var(--cor-bg-secundario);
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas);
+}
+
+.containerCardTarefa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.checkboxRoot {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--bordas-arredondadas-2);
+  background-color: transparent;
+  border: 1px solid var(--cor-bordas-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--cor-bordas-hover);
+  }
+}
+
+.checkboxRoot[data-state='checked'] {
+  background-color: var(--cor-checkbox-checked);
+  border-color: var(--cor-checkbox-checked);
+}
+
+.checkboxIndicator {
+  color: #EDEFEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textoCardTarefa {
+  color: var(--cor-letra-principal);
+  font-family: var(--fonte-principal);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: var(--espaco-entre-texto);
+}
+
+.concluido .textoCardTarefa {
+  text-decoration: line-through;
+  color: var(--cor-letra-secundaria);
+}
+
+.btnAcaoCardTarefa {
+  border: none;
+  background-color: transparent;
+  border-radius: var(--bordas-arredondadas);
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--cor-bg-hover-icone);
+  }
+  
+}
+
+.iconeCardTarefa {
+  padding: 4px;
+  color:  var(--cor-icones);
+}
+

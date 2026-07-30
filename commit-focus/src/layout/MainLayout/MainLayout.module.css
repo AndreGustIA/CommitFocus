@@ -1,7 +1,7 @@
 .containerMain {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .containerLayout {
@@ -9,12 +9,20 @@
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  padding: 20px;
-  border: 1px solid var(--cor-bordas-principal);
+  padding: 20px 20px 4px 20px;
   width: 100%;
   max-width: 650px;
+  flex: 1;
 }
 
 hr {
   border: 1px solid var(--cor-bordas-principal);
+}
+
+.containerCards {
+  background-color: var(--cor-bg-principal);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }

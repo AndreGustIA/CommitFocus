@@ -10,7 +10,8 @@
   --bordas-arredondadas: 8px;
   --bordas-arredondadas-2: 4px;
   --espaco-entre-texto: 1.2px;
-  --fonte-principal: 'Inter', sans-serif; 
+  --fonte-principal: 'Inter', sans-serif;
+  --cor-checkbox-checked: #00B168;
 }
 
 * {

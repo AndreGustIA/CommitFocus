@@ -12,7 +12,12 @@ export function MainLayout() {
           <Header />
           <InputAddTarefa />
           <hr />
-          <CardTarefa />
+          
+          <div className={style.containerCards}>
+            <CardTarefa />
+            <CardTarefa />
+            <CardTarefa />
+          </div>
           <hr />
           <Footer />
         </div>  
