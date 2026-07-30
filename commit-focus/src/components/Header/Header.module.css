@@ -1,0 +1,31 @@
+.containerHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  h1 {
+    color: var(--cor-letra-principal);
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: var(--espaco-entre-texto);
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    border-radius: 8px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #252525;
+    }
+  }
+}
+
+.iconeHeader {
+  padding: 4px;
+  color:  var(--cor-icones);
+}

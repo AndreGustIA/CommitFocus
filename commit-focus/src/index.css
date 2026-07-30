@@ -1,0 +1,24 @@
+:root {
+  --cor-bg-principal: #0F0F0F;
+  --cor-bg-secundario: #171717;
+  --cor-letra-principal: #EDEFEE;
+  --cor-letra-secundaria: #ABABAB;
+  --cor-icones: #ABABAB;
+  --cor-bg-hover-icone: #252525;
+  --cor-bordas-principal: #2B2B2B;
+  --cor-bordas-hover: #3C3C3C;
+  --bordas-arredondadas: 8px;
+  --bordas-arredondadas-2: 4px;
+  --espaco-entre-texto: 1.2px;
+  --fonte-principal: 'Inter', sans-serif; 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--cor-bg-principal);
+}

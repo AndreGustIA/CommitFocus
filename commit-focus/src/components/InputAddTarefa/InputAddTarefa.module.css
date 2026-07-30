@@ -1,0 +1,57 @@
+.containerInputAddTarefa {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--cor-bg-secundario); /* Fundo bem escuro */
+  border: 1px solid var(--cor-bordas-principal); /* Borda sutil */
+  height: 45px;
+  border-radius: var(--bordas-arredondadas);
+  padding: 6px;
+  width: 100%;
+
+  &:hover {
+    border-color: var(--cor-bordas-hover);
+  }
+
+  &:focus-within {
+    border-color: var(--cor-bordas-hover);
+  }
+}
+
+.iconeInput {
+  color: var(--cor-icones);
+  cursor: default;
+}
+
+.inputAddTarefa {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  color: var(--cor-letra-principal);
+  font-family: var(--fonte-principal);
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+
+  &::placeholder {
+    color: var(--cor-letra-secundaria);
+  }
+}
+
+.buttonAddTarefa {
+  text-transform: uppercase;
+  background-color: var(--cor-bg-secundario);
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas);
+  padding: 7px 9px;
+  font-size: 12px;
+  font-family: var(--fonte-principal);
+  font-weight: 700;
+  color: var(--cor-letra-principal);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--cor-bordas-hover);
+  }
+}
+

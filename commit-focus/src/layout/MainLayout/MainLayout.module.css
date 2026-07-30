@@ -1,0 +1,20 @@
+.containerMain {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.containerLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid var(--cor-bordas-principal);
+  width: 100%;
+  max-width: 650px;
+}
+
+hr {
+  border: 1px solid var(--cor-bordas-principal);
+}
