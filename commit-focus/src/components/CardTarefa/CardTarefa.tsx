@@ -1,13 +1,51 @@
+import { useState } from 'react';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import type { Task } from '../../types/task';
 import style from './CardTarefa.module.css'
 
-export function CardTarefa() {
+interface CardTarefaProps {
+  tarefa: Task;
+  onToggleTask: (id: string, estaConcluido: boolean) => void;
+  onDeleteTask: (id: string) => void;
+  onEditTask: (id: string, tarefaEditada: string) => void;
+}
+
+export function CardTarefa({ tarefa, onToggleTask, onDeleteTask, onEditTask }: CardTarefaProps) {
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [tarefaEditada, setTarefaEditada] = useState(tarefa.tarefa);
+
+  function lidarComEdicao() {
+    if (tarefaEditada.trim() === '') {
+      setTarefaEditada(tarefa.tarefa);
+      setIsEditing(false);
+      return;
+    }
+
+    if (tarefaEditada !== tarefa.tarefa) {
+      onEditTask(tarefa.id, tarefaEditada);
+    }
+    setIsEditing(false);
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'Enter') {
+      lidarComEdicao();
+    } else if (event.key === 'Escape') {
+      setTarefaEditada(tarefa.tarefa);
+      setIsEditing(false);
+    }
+  }
+
   return (
     <div className={style.containerCard}>
-      <label className={style.containerCardTarefa} htmlFor="">
+      <label className={style.containerCardTarefa} htmlFor={`tarefa-${tarefa.id}`}>
         <Checkbox.Root 
           className={style.checkboxRoot}
+          id={`tarefa-${tarefa.id}`}
+          checked={tarefa.estaConcluido}
+          onCheckedChange={() => onToggleTask(tarefa.id, tarefa.estaConcluido)}
           >
           <Checkbox.Indicator className={style.checkboxIndicator}>
             <svg
@@ -24,7 +62,25 @@ export function CardTarefa() {
             </svg>
           </Checkbox.Indicator>
         </Checkbox.Root>
-        <span className={style.textoCardTarefa}>Estudar React</span>
+        {isEditing ? (
+          <input
+            className={style.inputEdicaoTarefa}
+            type="text"
+            value={tarefaEditada}
+            onChange={(e) => setTarefaEditada(e.target.value)}
+            onBlur={lidarComEdicao}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            
+          />
+        ) : (
+          <span 
+            className={`${style.textoCardTarefa} ${tarefa.estaConcluido ? style.textoCardTarefaConcluida : ''}`}
+            onDoubleClick={() => setIsEditing(true)}
+          >
+            {tarefa.tarefa}
+          </span>
+        )}
       </label>
 
       <DropdownMenu.Root>
@@ -40,14 +96,20 @@ export function CardTarefa() {
             sideOffset={6}
             align="end"
           >
-            <DropdownMenu.Item className={style.dropdownItem}>
+            <DropdownMenu.Item 
+              className={style.dropdownItem}
+              onClick={() => setIsEditing(true)}
+            >
               <span className={`material-symbols-outlined ${style.iconesDropTarefa}`}>edit</span>
               <span className={style.textoIconeCardTarefa}>editar</span>
             </DropdownMenu.Item>
 
             <DropdownMenu.Separator className={style.dropdownSeparator} />
 
-            <DropdownMenu.Item className={style.dropdownItem}>
+            <DropdownMenu.Item 
+              className={style.dropdownItem}
+              onClick={() => onDeleteTask(tarefa.id)}
+            >
               <span className={`material-symbols-outlined ${style.iconesDropTarefa}`}>delete</span>
               <span className={style.textoIconeCardTarefa}>excluir</span>
             </DropdownMenu.Item>

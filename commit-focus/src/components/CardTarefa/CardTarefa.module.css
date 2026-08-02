@@ -3,7 +3,9 @@
   justify-content: space-between;
   align-items: center;
   height: 45px;
+  max-height: 45px;
   padding: 0 15px;
+  flex-shrink: 0;
   background-color: var(--cor-bg-secundario);
   border: 1px solid var(--cor-bordas-principal);
   border-radius: var(--bordas-arredondadas);
@@ -47,6 +49,20 @@
   justify-content: center;
 }
 
+.inputEdicaoTarefa {
+  height: 30px;
+  background-color: var(--cor-bg-principal);
+  color: var(--cor-letra-principal);
+  font-family: var(--fonte-principal);
+  font-weight: 400;
+  text-indent: 10px;
+  font-size: 16px;
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas-2);
+  outline: none;
+  width: 100%;
+}
+
 .textoCardTarefa {
   color: var(--cor-letra-principal);
   font-family: var(--fonte-principal);
@@ -55,7 +71,7 @@
   letter-spacing: var(--espaco-entre-texto);
 }
 
-.concluido .textoCardTarefa {
+.textoCardTarefaConcluida {
   text-decoration: line-through;
   color: var(--cor-letra-secundaria);
 }
@@ -100,7 +116,7 @@
 
 .dropdownSeparator {
   height: 1px;
-  background-color: var(--cor-bordas-principal); /* Cor da linha (pode usar a mesma cor da borda do container) */
+  background-color: var(--cor-bordas-principal);
 }
 
 .dropdownItem {
