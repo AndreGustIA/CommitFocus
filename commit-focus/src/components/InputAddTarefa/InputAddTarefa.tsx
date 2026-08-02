@@ -1,17 +1,22 @@
 import { useState, type FormEvent } from 'react';
 import style from './InputAddTarefa.module.css';
+import type { ToastType } from '../../components/Toast/Toast';
 
 interface InputAddTarefaProps {
   adicionarTarefa: (tarefa: string) => void;
+  exibirToast: (titulo: string, mensagem: string, tipo: ToastType) => void;
 }
 
-export function InputAddTarefa({ adicionarTarefa }: InputAddTarefaProps) {
+export function InputAddTarefa({ adicionarTarefa, exibirToast }: InputAddTarefaProps) {
   const [tarefaTexto, setTarefaTexto] = useState('');
   
   function lidarComEnvio(e: FormEvent) {
     e.preventDefault();
-
-    if (!tarefaTexto.trim()) return;
+    
+    if (!tarefaTexto.trim()) {
+      exibirToast('Campo vazio', 'Adicione uma tarefa', 'erro');
+      return;
+    }
 
     adicionarTarefa(tarefaTexto);
     setTarefaTexto('');

@@ -4,12 +4,25 @@ import { Header } from "../../components/Header/Header";
 import { InputAddTarefa } from '../../components/InputAddTarefa/InputAddTarefa';
 import { Footer } from '../../components/Footer/Footer';
 import { CardTarefa } from '../../components/CardTarefa/CardTarefa';
+import { Toast, type ToastType } from '../../components/Toast/Toast';
 import type { Task } from '../../types/task';
 import { taskService } from '../../services/api';
+
+interface ToastState {
+  titulo: string;
+  mensagem: string;
+  tipo: ToastType;
+}
 
 export function MainLayout() {
   const [tarefas, setTarefas] = useState<Task[]>([]);
   const [estaCarregando, setEstaCarregando] = useState(true);
+
+  const [toast, setToast] = useState<ToastState | null>(null);
+
+  const exibirToast = (titulo: string, mensagem: string, tipo: ToastType) => {
+    setToast({ titulo, mensagem, tipo });
+  };
 
   useEffect(() => {
     taskService
@@ -20,6 +33,11 @@ export function MainLayout() {
   }, []);
 
   async function adicionarTarefa(tarefaTexto: string) {
+    if (!tarefaTexto.trim()) {
+      exibirToast('Campo vazio', 'Adicione uma tarefa', 'erro');
+      return;
+    }
+
     try {
       const novaTarefa = await taskService.create(tarefaTexto);
       setTarefas((prevTarefas) => [...prevTarefas, novaTarefa]);
@@ -43,6 +61,11 @@ export function MainLayout() {
   }
 
   async function editarTarefa(id: string, tarefaEditada: string) {
+    if (!tarefaEditada.trim()) {
+      exibirToast('Campo vazio', 'O texto da tarefa não pode estar vazio.', 'erro');
+      return;
+    }
+
     try {
       const tarefaAtualizada = await taskService.update(id, tarefaEditada);
       setTarefas((prevTarefas) =>
@@ -50,6 +73,7 @@ export function MainLayout() {
           tarefa.id === id ? tarefaAtualizada : tarefa
         )
       );
+      exibirToast('Tarefa atualizada', 'A tarefa foi atualizada com sucesso.', 'sucesso');
     } catch (err) {
       console.error('Erro ao editar tarefa:', err);
     }
@@ -59,6 +83,8 @@ export function MainLayout() {
     try {
       await taskService.delete(id);
       setTarefas((prevTarefas) => prevTarefas.filter((tarefa) => tarefa.id !== id));
+
+      exibirToast('Tarefa deletada', 'A tarefa foi deletada com sucesso.', 'deletar');
     } catch (err) {
       console.error('Erro ao deletar tarefa:', err);
     }
@@ -72,11 +98,21 @@ export function MainLayout() {
 
   return (
     <>
+      {toast && (
+        <Toast
+          titulo={toast.titulo}
+          mensagem={toast.mensagem}
+          tipo={toast.tipo}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <div className={style.containerMain}>
         <div className={style.containerLayout}>
           <Header />
-          <InputAddTarefa 
+          <InputAddTarefa
             adicionarTarefa={adicionarTarefa}
+            exibirToast={exibirToast}
           />
           <hr />
           
