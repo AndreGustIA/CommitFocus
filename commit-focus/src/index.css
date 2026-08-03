@@ -14,6 +14,22 @@
   --cor-checkbox-checked: #00B168;
 }
 
+[data-theme="light"] {
+  --cor-bg-principal: #F5F5F5;
+  --cor-bg-secundario: #FFFFFF;
+  --cor-letra-principal: #1A1A1A;
+  --cor-letra-secundaria: #4D4D4D;
+  --cor-icones: #4D4D4D;
+  --cor-bg-hover-icone: #E0E0E0;
+  --cor-bordas-principal: #CCCCCC;
+  --cor-bordas-hover: #B3B3B3;
+  --bordas-arredondadas: 8px;
+  --bordas-arredondadas-2: 4px;
+  --espaco-entre-texto: 1.2px;
+  --fonte-principal: 'Inter', sans-serif;
+  --cor-checkbox-checked: #00B168;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -22,4 +38,6 @@
 
 body {
   background-color: var(--cor-bg-principal);
+  color: var(--cor-texto-principal);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }

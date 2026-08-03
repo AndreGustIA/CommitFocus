@@ -1,6 +1,7 @@
 import {  useEffect, useState } from 'react';
 import style from './MainLayout.module.css';
 import { Header } from "../../components/Header/Header";
+import { useTheme } from '../../hooks/useTheme';
 import { InputAddTarefa } from '../../components/InputAddTarefa/InputAddTarefa';
 import { Footer } from '../../components/Footer/Footer';
 import { CardTarefa } from '../../components/CardTarefa/CardTarefa';
@@ -16,6 +17,7 @@ interface ToastState {
 }
 
 export function MainLayout() {
+  const { tema, alternarTema } = useTheme();
   const [tarefas, setTarefas] = useState<Task[]>([]);
   const [estaCarregando, setEstaCarregando] = useState(true);
 
@@ -135,7 +137,10 @@ export function MainLayout() {
 
       <div className={style.containerMain}>
         <div className={style.containerLayout}>
-          <Header />
+          <Header
+            tema={tema}
+            alternarTema={alternarTema}
+          />
           <InputAddTarefa
             adicionarTarefa={adicionarTarefa}
             exibirToast={exibirToast}
