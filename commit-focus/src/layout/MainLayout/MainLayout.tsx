@@ -5,6 +5,7 @@ import { InputAddTarefa } from '../../components/InputAddTarefa/InputAddTarefa';
 import { Footer } from '../../components/Footer/Footer';
 import { CardTarefa } from '../../components/CardTarefa/CardTarefa';
 import { Toast, type ToastType } from '../../components/Toast/Toast';
+import { ModalDeletar } from '../../components/ModalDeletar/ModalDeletar';
 import type { Task } from '../../types/task';
 import { taskService } from '../../services/api';
 
@@ -17,6 +18,8 @@ interface ToastState {
 export function MainLayout() {
   const [tarefas, setTarefas] = useState<Task[]>([]);
   const [estaCarregando, setEstaCarregando] = useState(true);
+
+  const [modalDeletarAberto, setModalDeletarAberto] = useState(false);
 
   const [toast, setToast] = useState<ToastState | null>(null);
 
@@ -31,6 +34,23 @@ export function MainLayout() {
     .catch((err) => console.error(err))
     .finally(() => setEstaCarregando(false));
   }, []);
+
+  async function deletarTodasTarefas() {
+    if (tarefas.length === 0) {
+      exibirToast('Nenhuma tarefa', 'Não há tarefas para deletar.', 'erro');
+      return;
+    }
+
+    try {
+      await taskService.deleteAll(tarefas);
+      setTarefas([]);
+      exibirToast('Tarefas deletadas', 'Todas as tarefas foram deletadas com sucesso.', 'deletar');
+    } catch (err) {
+      console.error('Erro ao deletar todas as tarefas:', err);
+    } finally {
+      setModalDeletarAberto(false);
+    }
+  }
 
   async function adicionarTarefa(tarefaTexto: string) {
     if (!tarefaTexto.trim()) {
@@ -107,6 +127,12 @@ export function MainLayout() {
         />
       )}
 
+      <ModalDeletar
+        aberto={modalDeletarAberto}
+        onOpenChange={setModalDeletarAberto}
+        onConfirmar={deletarTodasTarefas}
+      />
+
       <div className={style.containerMain}>
         <div className={style.containerLayout}>
           <Header />
@@ -139,6 +165,13 @@ export function MainLayout() {
           <hr />
           <Footer
             contadorTarefasRestante={contagemTarefasRestante}
+            abrirModalDeletar={() => {
+              if (tarefas.length === 0) {
+                exibirToast('Nenhuma tarefa', 'Não há tarefas para deletar.', 'erro');
+                return;
+              }
+              setModalDeletarAberto(true);
+            }}
           />
         </div>  
       </div> 

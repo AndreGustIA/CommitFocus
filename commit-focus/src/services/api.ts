@@ -45,4 +45,8 @@ export const taskService = {
     await api.delete(`/tasks/${id}`);
   },
 
+  deleteAll: async (tarefas: Task[]) => {
+    await Promise.all(tarefas.map((tarefa) => api.delete(`/tasks/${tarefa.id}`)));
+  }
+
 }
