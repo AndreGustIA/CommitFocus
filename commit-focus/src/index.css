@@ -38,6 +38,6 @@
 
 body {
   background-color: var(--cor-bg-principal);
-  color: var(--cor-texto-principal);
+  color: var(--cor-letra-principal);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
