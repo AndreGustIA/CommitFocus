@@ -51,8 +51,8 @@
 
 .botaoCancelar {
   background-color: transparent;
-  border: 1px solid var(--cor-bordas-principal, #444);
-  color: var(--cor-letra-principal, #fff);
+  border: 1px solid var(--cor-bordas-principal);
+  color: var(--cor-letra-principal);
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;

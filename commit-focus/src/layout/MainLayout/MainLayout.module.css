@@ -45,7 +45,6 @@ hr {
 }
 
 .containerCards {
-  background-color: var(--cor-bg-principal);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
