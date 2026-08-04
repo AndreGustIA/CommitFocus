@@ -14,16 +14,18 @@ interface CardTarefaProps {
 export function CardTarefa({ tarefa, onToggleTask, onDeleteTask, onEditTask }: CardTarefaProps) {
 
   const [isEditing, setIsEditing] = useState(false);
-  const [tarefaEditada, setTarefaEditada] = useState(tarefa.tarefa);
+  const [tarefaEditada, setTarefaEditada] = useState(tarefa.titulo);
+
+  const statusTask = tarefa.status === 'CONCLUIDA';
 
   function lidarComEdicao() {
     if (tarefaEditada.trim() === '') {
-      setTarefaEditada(tarefa.tarefa);
+      setTarefaEditada(tarefa.titulo);
       setIsEditing(false);
       return;
     }
 
-    if (tarefaEditada !== tarefa.tarefa) {
+    if (tarefaEditada !== tarefa.titulo) {
       onEditTask(tarefa.id, tarefaEditada);
     }
     setIsEditing(false);
@@ -33,7 +35,7 @@ export function CardTarefa({ tarefa, onToggleTask, onDeleteTask, onEditTask }: C
     if (event.key === 'Enter') {
       lidarComEdicao();
     } else if (event.key === 'Escape') {
-      setTarefaEditada(tarefa.tarefa);
+      setTarefaEditada(tarefa.titulo);
       setIsEditing(false);
     }
   }
@@ -44,8 +46,8 @@ export function CardTarefa({ tarefa, onToggleTask, onDeleteTask, onEditTask }: C
         <Checkbox.Root 
           className={style.checkboxRoot}
           id={`tarefa-${tarefa.id}`}
-          checked={tarefa.estaConcluido}
-          onCheckedChange={() => onToggleTask(tarefa.id, tarefa.estaConcluido)}
+          checked={statusTask}
+          onCheckedChange={() => onToggleTask(tarefa.id, statusTask)}
           >
           <Checkbox.Indicator className={style.checkboxIndicator}>
             <svg
@@ -75,10 +77,10 @@ export function CardTarefa({ tarefa, onToggleTask, onDeleteTask, onEditTask }: C
           />
         ) : (
           <span 
-            className={`${style.textoCardTarefa} ${tarefa.estaConcluido ? style.textoCardTarefaConcluida : ''}`}
+            className={`${style.textoCardTarefa} ${statusTask ? style.textoCardTarefaConcluida : ''}`}
             onDoubleClick={() => setIsEditing(true)}
           >
-            {tarefa.tarefa}
+            {tarefa.titulo}
           </span>
         )}
       </label>

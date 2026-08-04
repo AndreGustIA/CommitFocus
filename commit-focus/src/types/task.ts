@@ -1,6 +1,6 @@
 export interface Task {
   id: string;
-  tarefa: string;
+  titulo: string;
   descricao: string;
-  estaConcluido: boolean;
+  status: 'PENDENTE' | 'CONCLUIDA';
 }

@@ -31,7 +31,7 @@ export function InputAddTarefa({ adicionarTarefa, exibirToast }: InputAddTarefaP
       <input 
         className={style.inputAddTarefa}
         type="text" 
-        placeholder="Adicione uma tarefa" 
+        placeholder="Adicione uma tarefa aqui..." 
         value={tarefaTexto}
         onChange={(e) => setTarefaTexto(e.target.value)}
       />

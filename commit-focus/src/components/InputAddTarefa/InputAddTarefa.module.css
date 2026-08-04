@@ -39,14 +39,13 @@
 }
 
 .buttonAddTarefa {
-  text-transform: uppercase;
   background-color: var(--cor-bg-secundario);
   border: 1px solid var(--cor-bordas-principal);
   border-radius: var(--bordas-arredondadas);
   padding: 7px 9px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: var(--fonte-principal);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--cor-letra-principal);
   cursor: pointer;
 
