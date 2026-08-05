@@ -44,7 +44,7 @@ export function MainLayout() {
     }
 
     try {
-      await taskService.deleteAll(tarefas);
+      await taskService.deleteAll();
       setTarefas([]);
       exibirToast('Tarefas deletadas', 'Todas as tarefas foram deletadas com sucesso.', 'deletar');
     } catch (err) {
@@ -116,7 +116,7 @@ export function MainLayout() {
     return <div>Carregando...</div>;
   }
 
-  const contagemTarefasRestante = tarefas.filter((tarefa) => !tarefa.estaConcluido).length;
+  const contagemTarefasRestante = tarefas.filter((tarefa) => !tarefa.status).length;
 
   return (
     <>
@@ -141,6 +141,7 @@ export function MainLayout() {
             tema={tema}
             alternarTema={alternarTema}
           />
+          <hr />
           <InputAddTarefa
             adicionarTarefa={adicionarTarefa}
             exibirToast={exibirToast}

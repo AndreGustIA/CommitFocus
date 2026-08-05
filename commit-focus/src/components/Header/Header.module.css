@@ -1,9 +1,16 @@
 .containerHeader {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+}
+
+.containerConteudoHeader {
+  width: 1280px;
+  padding: 0 96px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
   h1 {
     color: var(--cor-letra-principal);
@@ -21,6 +28,38 @@
     &:hover {
       cursor: pointer;
       background-color: var(--cor-bg-hover-icone);
+    }
+  }
+}
+
+.conteudoBotoesHeader {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navegacaoPages {
+  
+  ul {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+
+    a {
+      font-family: var(--fonte-principal);
+      color: var(--cor-letra-secundaria);
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: var(--bordas-arredondadas-2);
+
+      &:hover {
+        background-color: var(--cor-bg-hover-icone);
+        color: var(--cor-letra-principal);
+
+      }
     }
   }
 }
