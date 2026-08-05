@@ -1,20 +1,16 @@
-import style from './Footer.module.css'
+import style from './Footer.module.css';
 
-interface FooterProps {
-  contadorTarefasRestante: number;
-  abrirModalDeletar?: () => void;
-}
-
-export function Footer({ contadorTarefasRestante, abrirModalDeletar }: FooterProps) {
+export function Footer() {
   return (
-    <footer className={style.containerFooter}>
-      <span className={style.restantesFooter}>{contadorTarefasRestante} tarefas restantes</span>
-      <span 
-        className={`material-symbols-outlined ${style.iconeFooter}`} 
-        onClick={abrirModalDeletar}
-      >
-        delete_forever
-      </span>
-    </footer>
+    <>
+      <footer className={style.footerSite}>
+        <div className={style.containerFooter}>
+          <hr />
+          <div className={style.textoFooterSite}>
+            <span>&copy; 2026 Copyright. Todos os direitos reservados</span>
+          </div>  
+        </div>
+      </footer>
+    </>
   )
 }

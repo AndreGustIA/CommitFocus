@@ -1,5 +1,6 @@
 import * as Toggle from '@radix-ui/react-toggle';
 import style from './Header.module.css';
+import { NavLink } from 'react-router-dom';
 
 interface HeaderProps {
   tema: 'dark' | 'light';
@@ -14,9 +15,9 @@ export function Header({ tema, alternarTema }: HeaderProps) {
         <div className={style.conteudoBotoesHeader}>
           <nav className={style.navegacaoPages}>
             <ul>
-              <li><a href="#">Início</a></li>
-              <li><a href="#">Tarefas</a></li>
-              <li><a href="#">Daily</a></li>
+              <li><NavLink to="/">Início</NavLink></li>
+              <li><NavLink to="/tarefas">Tarefas</NavLink></li>
+              <li><NavLink to="/daily">Daily</NavLink></li>
             </ul>
           </nav>
           <Toggle.Root

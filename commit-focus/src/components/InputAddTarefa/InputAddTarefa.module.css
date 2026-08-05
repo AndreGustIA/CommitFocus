@@ -1,3 +1,11 @@
+.tituloAddTarefa {
+  font-family: var(--fonte-principal);
+  color: var(--cor-letra-principal);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
 .containerInputAddTarefa {
   display: flex;
   align-items: center;

@@ -23,21 +23,25 @@ export function InputAddTarefa({ adicionarTarefa, exibirToast }: InputAddTarefaP
   }
 
   return (
-    <form 
-      className={style.containerInputAddTarefa}
-      onSubmit={lidarComEnvio}
-    >
-      <span className={`material-symbols-outlined ${style.iconeInput}`}>add</span>
-      <input 
-        className={style.inputAddTarefa}
-        type="text" 
-        placeholder="Adicione uma tarefa aqui..." 
-        value={tarefaTexto}
-        onChange={(e) => setTarefaTexto(e.target.value)}
-      />
-      <button className={style.buttonAddTarefa} type="submit">
-        Adicionar
-      </button>
-    </form>
+    <>
+      <h1 className={style.tituloAddTarefa}>Registre sua nova tarefa</h1>
+
+      <form 
+        className={style.containerInputAddTarefa}
+        onSubmit={lidarComEnvio}
+      >
+        <span className={`material-symbols-outlined ${style.iconeInput}`}>add</span>
+        <input 
+          className={style.inputAddTarefa}
+          type="text" 
+          placeholder="Adicione uma tarefa aqui..." 
+          value={tarefaTexto}
+          onChange={(e) => setTarefaTexto(e.target.value)}
+        />
+        <button className={style.buttonAddTarefa} type="submit">
+          Adicionar
+        </button>
+      </form>
+    </>  
   )
 } 
