@@ -1,17 +1,9 @@
-.tituloAddTarefa {
-  font-family: var(--fonte-principal);
-  color: var(--cor-letra-principal);
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
 .containerInputAddTarefa {
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: var(--cor-bg-secundario); /* Fundo bem escuro */
-  border: 1px solid var(--cor-bordas-principal); /* Borda sutil */
+  background-color: var(--cor-bg-secundario);
+  border: 1px solid var(--cor-bordas-principal);
   height: 45px;
   border-radius: var(--bordas-arredondadas);
   padding: 6px;
@@ -47,7 +39,7 @@
 }
 
 .buttonAddTarefa {
-  background-color: var(--cor-bg-secundario);
+  background-color: var(--cor-bg-principal);
   border: 1px solid var(--cor-bordas-principal);
   border-radius: var(--bordas-arredondadas);
   padding: 7px 9px;

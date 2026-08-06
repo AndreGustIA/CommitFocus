@@ -24,8 +24,6 @@ export function InputAddTarefa({ adicionarTarefa, exibirToast }: InputAddTarefaP
 
   return (
     <>
-      <h1 className={style.tituloAddTarefa}>Registre sua nova tarefa</h1>
-
       <form 
         className={style.containerInputAddTarefa}
         onSubmit={lidarComEnvio}

@@ -3,7 +3,7 @@ import type { Task } from '../types/task';
 
 export const api = axios.create ({
 
-  baseURL: 'http://localhost:3000', /* localhost:8080/v1/commitfocus */
+  baseURL: 'http://localhost:8080/v1/commitfocus',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,8 +14,7 @@ export const taskService = {
   // GET: Busca todas as tarefas
   async getAll(): Promise<Task[]> {
     const response = await api.get('/tasks');
-    const listaBackend = response.data.content || response.data;
-    return listaBackend;
+    return response.data;
   },
 
   // POST: Cria uma nova tarefa

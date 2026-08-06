@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from './Tarefas.module.css'; // <-- 1. Adicionado o import do CSS
+import style from './Tarefas.module.css'
 import { InputAddTarefa } from '../../components/InputAddTarefa/InputAddTarefa';
 import { CardTarefa } from '../../components/CardTarefa/CardTarefa';
 import { ModalDeletar } from '../../components/ModalDeletar/ModalDeletar';
@@ -18,6 +18,9 @@ export function Tarefas() {
   const [estaCarregando, setEstaCarregando] = useState(true);
   const [modalDeletarAberto, setModalDeletarAberto] = useState(false);
   const [toast, setToast] = useState<ToastState | null>(null);
+
+  type TipoFiltro = 'todas' | 'pendentes' |  'concluidas';
+  const [filtroAtual, setFiltroAtual] = useState<TipoFiltro>('todas')
 
   const exibirToast = (titulo: string, mensagem: string, tipo: ToastType) => {
     setToast({ titulo, mensagem, tipo });
@@ -100,10 +103,17 @@ export function Tarefas() {
     }
   }
 
-  const contagemTarefasRestante = tarefas.filter((tarefa) => !tarefa.status).length;
+  const contagemTarefasRestantes = tarefas.length
+
+  const tarefasFiltradas = tarefas.filter((tarefa) => {
+    if ( filtroAtual === 'pendentes' ) return tarefa.status === 'PENDENTE';
+    if ( filtroAtual === 'concluidas' ) return tarefa.status === 'CONCLUIDA';
+
+    return true;
+  })
 
   return (
-    <>
+    <main className={style.containerPrincipal}>
       {toast && (
         <Toast
           titulo={toast.titulo}
@@ -119,20 +129,72 @@ export function Tarefas() {
         onConfirmar={deletarTodasTarefas}
       />
 
+      <div className={style.cabecalhoTarefas}>
+        <h1>Registre sua nova tarefa</h1>
+
+        <div className={style.infoTarefas}>
+          <span className={style.totalTexto}>{contagemTarefasRestantes} total de tarefas</span>
+
+          <button
+            className={style.botaoApagarTudo}
+            onClick={() => {
+              if(tarefas.length === 0) {
+                exibirToast('Nenhuma tarefa', 'Não há tarefas para deletar', 'erro');
+                return;
+              }
+              setModalDeletarAberto(true);
+            }}
+          >
+          Apagar todas as tarefas
+          <span className={`material-symbols-outlined ${style.iconeApagarTodas}`}>delete</span>
+          </button>
+        </div>
+      </div>
+      
       <InputAddTarefa adicionarTarefa={adicionarTarefa} exibirToast={exibirToast} />
+
+      <div className={style.filterContainer}>
+        <div className={style.filterContainerBtn}>
+          <button
+            type='button'
+            className={`${style.botaoFiltro} ${filtroAtual === 'todas' ? style.filtroAtivo : ''}`}
+            onClick={() => setFiltroAtual('todas')}
+          >
+            Todas
+          </button>
+          <button
+            type='button'
+            className={`${style.botaoFiltro} ${filtroAtual === 'pendentes' ? style.filtroAtivo : ''}`}
+            onClick={() => setFiltroAtual('pendentes')}
+          >
+            Pendentes
+          </button>
+          <button
+            type='button'
+            className={`${style.botaoFiltro} ${filtroAtual === 'concluidas' ? style.filtroAtivo : ''}`}
+            onClick={() => setFiltroAtual('concluidas')}
+          >
+            Concluídas
+          </button>
+        </div>
+      </div>
+
+      <hr />
 
       <div className={style.containerCards}>
         {estaCarregando ? (
-          <p>Carregando tarefas...</p> // Agora isso aqui vai funcionar direitinho!
-        ) : tarefas.length === 0 ? (
+          <p>Carregando tarefas...</p>
+        ) : tarefasFiltradas.length === 0 ? (
           <div className={style.containerSemTarefas}>
             <span className={`material-symbols-outlined ${style.iconeSemtarefa}`}>
               edit_note
             </span>
-            <p>Você ainda não tem tarefas criadas</p>
+            <p>
+              {filtroAtual === 'todas' ? 'Você ainda não tem tarefas criadas' : 'Nenhuma tarefa encontrada neste filtro'}
+            </p>
           </div>
         ) : (
-          tarefas.map((tarefa) => (
+          tarefasFiltradas.map((tarefa) => (
             <CardTarefa
               key={tarefa.id}
               tarefa={tarefa}
@@ -143,26 +205,7 @@ export function Tarefas() {
           ))
         )}
       </div>
-
-      <hr />
-
-      <footer className={style.containerFooter}>
-        <span className={style.restantesFooter}>
-          {contagemTarefasRestante} tarefas restantes
-        </span>
-        <span
-          className={`material-symbols-outlined ${style.iconeFooter}`}
-          onClick={() => {
-          if (tarefas.length === 0) {
-            exibirToast('Nenhuma tarefa', 'Não há tarefas para deletar.', 'erro');
-            return;
-          }
-          setModalDeletarAberto(true);
-        }}
-        >
-          delete_forever
-        </span>
-      </footer>
-    </>
+      
+    </main>
   );
 }

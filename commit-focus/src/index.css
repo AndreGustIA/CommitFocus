@@ -12,6 +12,9 @@
   --espaco-entre-texto: 1.2px;
   --fonte-principal: 'Inter', sans-serif;
   --cor-checkbox-checked: #00B168;
+
+  --cor-icone-ponto-infos-concluidas: #00B168;
+  --cor-icone-ponto-infos-pendentes: #BE1A1A;
 }
 
 [data-theme="light"] {

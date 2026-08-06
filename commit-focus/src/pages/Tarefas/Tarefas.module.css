@@ -1,3 +1,107 @@
+.containerPrincipal {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.cabecalhoTarefas {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  h1 {
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-principal);
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.infoTarefas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.totalTexto {
+  color: var(--cor-letra-secundaria);
+  font-family: var(--fonte-principal);
+  letter-spacing: 1.2px;
+  font-size: 14px;
+}
+
+.botaoApagarTudo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--cor-bg-principal);
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas-2);
+  font-family: var(--fonte-principal);
+  color: var(--cor-letra-principal);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 7px 10px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--cor-bordas-hover);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+.iconeApagarTodas {
+  color: var(--cor-letra-principal);
+  font-size: 20px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterContainerBtn {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  margin: 5px 0px 5px 0px;
+}
+
+.botaoFiltro {
+  background-color: transparent;
+    border: none;
+    font-family: var(--fonte-principal);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    color: var(--cor-letra-secundaria);
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--cor-bg-hover-icone);
+      color: var(--cor-letra-principal);
+    }
+  }
+  
+  .filtroAtivo {  
+  background-color: var(--cor-bg-hover-icone);
+  color: var(--cor-letra-principal);
+  font-weight: 500;
+}
+
 .containerSemTarefas {
   display: flex;
   flex-direction: column;
@@ -22,6 +126,7 @@
 }
 
 .containerCards {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -31,30 +136,4 @@
   -ms-overflow-style: auto;
   gap: 10px;
   flex: 1;
-}
-
-.containerFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.restantesFooter {
-  color: var(--cor-letra-secundaria);
-  font-family: var(--fonte-principal);
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: var(--espaco-entre-texto);
-}
-
-.iconeFooter {
-  color: var(--cor-icones);
-  cursor: pointer;
-  padding: 4px;
-  border-radius: var(--bordas-arredondadas);
-
-  &:hover {
-    background-color: var(--cor-bg-hover-icone);
-  }
 }
