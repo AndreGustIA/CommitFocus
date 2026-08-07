@@ -60,6 +60,11 @@
         color: var(--cor-letra-principal);
 
       }
+
+      &.linkAtivo {
+        background-color: var(--cor-bg-hover-icone);
+        color: var(--cor-letra-principal);
+      }
     }
   }
 }

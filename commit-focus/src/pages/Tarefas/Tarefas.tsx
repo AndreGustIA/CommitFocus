@@ -20,7 +20,19 @@ export function Tarefas() {
   const [toast, setToast] = useState<ToastState | null>(null);
 
   type TipoFiltro = 'todas' | 'pendentes' |  'concluidas';
-  const [filtroAtual, setFiltroAtual] = useState<TipoFiltro>('todas')
+  const [filtroAtual, setFiltroAtual] = useState<TipoFiltro>(() => {
+    const filtroSalvo = localStorage.getItem('@commitfocus:filtro');
+
+    if ( filtroSalvo === 'todas' || filtroSalvo === 'pendentes' || filtroSalvo === 'concluidas' ) {
+      return filtroSalvo as TipoFiltro;
+    }
+
+    return 'todas';
+  })
+
+  useEffect(() => {
+    localStorage.setItem('@commitfocus:filtro', filtroAtual);
+  }, [filtroAtual]);
 
   const exibirToast = (titulo: string, mensagem: string, tipo: ToastType) => {
     setToast({ titulo, mensagem, tipo });

@@ -15,9 +15,30 @@ export function Header({ tema, alternarTema }: HeaderProps) {
         <div className={style.conteudoBotoesHeader}>
           <nav className={style.navegacaoPages}>
             <ul>
-              <li><NavLink to="/">Início</NavLink></li>
-              <li><NavLink to="/tarefas">Tarefas</NavLink></li>
-              <li><NavLink to="/daily">Daily</NavLink></li>
+              <li>
+                <NavLink 
+                  to="/"
+                  className={({ isActive }) => isActive ? style.linkAtivo : ''}
+                >
+                Início
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/tarefas"
+                  className={({ isActive }) => isActive ? style.linkAtivo : ''}
+                >
+                Tarefas
+                </NavLink>
+              </li>
+              <li>
+                <NavLink 
+                to="/daily"
+                className={({ isActive }) => isActive ? style.linkAtivo : ''}
+                >
+                Daily
+                </NavLink>
+              </li>
             </ul>
           </nav>
           <Toggle.Root
