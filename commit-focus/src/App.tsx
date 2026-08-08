@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import { MainLayout } from './layout/MainLayout/MainLayout'
 import { Tarefas } from './pages/Tarefas/Tarefas'
+import { Historico } from './pages/Daily/Historico/Historico'
+import { Daily } from './pages/Daily/Daily'
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/daily',
-        element: <div>Daily (Em breve)</div>,
+        element: <Daily />,
+      },
+      {
+        path: '/daily/historico',
+        element: <Historico />
       }
+
     ]
   }
 ])

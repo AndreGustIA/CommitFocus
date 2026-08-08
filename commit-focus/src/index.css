@@ -13,8 +13,9 @@
   --fonte-principal: 'Inter', sans-serif;
   --cor-checkbox-checked: #00B168;
 
-  --cor-icone-ponto-infos-concluidas: #00B168;
-  --cor-icone-ponto-infos-pendentes: #BE1A1A;
+  --cor-borda-letra-icone-oquefiz: #45BE79;
+  --cor-borda-letra-icone-oquefarei: #2A95E3;
+  --cor-borda-letra-icone-impedimentos: #F75F4D;
 }
 
 [data-theme="light"] {
