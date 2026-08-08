@@ -1,0 +1,25 @@
+.containerMain {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+
+  h1 {
+    color: var(--cor-letra-principal);
+    font-family: var(--fonte-principal);
+    font-weight: 500;
+    font-size: 20px;
+  }
+}
+
+.secaoCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: auto;
+  flex: 1;
+  min-height: 0;
+}

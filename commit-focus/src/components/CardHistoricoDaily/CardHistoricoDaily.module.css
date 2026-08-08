@@ -1,0 +1,131 @@
+.containerHistorioDaily {
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.containerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-principal);
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
+
+.secaoBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    background-color: transparent;
+    border: 1px solid var(--cor-bordas-principal);
+    border-radius: var(--bordas-arredondadas-2);
+    display: flex;
+    gap: 5px;
+    padding: 5px 9px;
+    align-items: center;
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-secundaria);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--cor-bordas-hover);
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+
+    .iconeCopiar {
+      color: var(--cor-icones);
+      font-size: 12px;
+    }
+  }
+
+  .iconeLixeira {
+    color: var(--cor-icones);
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+.secaoPrincipal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-principal);
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.containerOqueFiz {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .iconeOqueFiz {
+    color: var(--cor-borda-letra-icone-oquefiz);
+    font-size: 22px;
+  }
+
+  .textoOqueFiz {
+    color: var(--cor-borda-letra-icone-oquefiz);
+    font-family: var(--fonte-principal);
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
+
+.containerOqueFarei {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+
+  .iconeOqueFarei {
+    color: var(--cor-borda-letra-icone-oquefarei);
+    font-size: 22px;
+  }
+
+  .textoOqueFarei {
+    color: var(--cor-borda-letra-icone-oquefarei);
+    font-family: var(--fonte-principal);
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
+
+.containerImpedimentos {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+
+  .iconeImpedimentos {
+    color: var(--cor-borda-letra-icone-impedimentos);
+    font-size: 22px;
+  }
+
+  .textoImpedimentos {
+    color: var(--cor-borda-letra-icone-impedimentos);
+    font-family: var(--fonte-principal);
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
