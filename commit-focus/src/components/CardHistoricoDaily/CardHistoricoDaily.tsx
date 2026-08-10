@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Daily } from '../../types/daily';
 import style from './CardHistoricoDaily.module.css';
 
@@ -7,6 +8,7 @@ interface CardHistoricoProps {
 }
 
 export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
+  const [copiado, setCopiado] = useState(false);
 
   function formatarData(dataString: string) {
     if (!dataString) return 'Data não informada';
@@ -30,14 +32,43 @@ export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
     return dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
   }
 
+  async function copiarParaMarkdown() {
+    const dataFormatada = formatarData(daily.dataReferencia);
+
+    const textoMarkdown = `**Daily - ${dataFormatada}**
+    
+    ✅ **O que fiz**
+    ${daily.oQueFiz}
+
+    🚀 **O que farei**
+    ${daily.oQueFarei}
+
+    ⚠️ **Impedimentos**
+    ${daily.impedimentos}
+    `;
+
+    try {
+      await navigator.clipboard.writeText(textoMarkdown);
+
+      setCopiado(true);
+
+      setTimeout(() => {
+        setCopiado(false)
+      }, 2000);
+
+    } catch (erro) {
+      console.error("Falha ao copiar o texto: ", erro);
+    }
+  }
+
   return (
     <div className={style.containerHistorioDaily}>
       <div className={style.containerHeader}>
         <p>{formatarData(daily.dataReferencia)}</p>
         <div className={style.secaoBtn}>
-          <button>
-            <span className={`material-symbols-outlined ${style.iconeCopiar}`}>content_copy</span>
-            Copiar markdown
+          <button onClick={copiarParaMarkdown}>
+            <span className={`material-symbols-outlined ${style.iconeCopiar}`}>{copiado ? 'check' : 'content_copy'}</span>
+            {copiado ? 'Copiado' : 'Copiar markdown'}
           </button>
 
           <span onClick={onDelete} className={`material-symbols-outlined ${style.iconeLixeira}`}>delete</span>
