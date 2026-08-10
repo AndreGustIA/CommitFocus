@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { Task } from '../types/task';
+import type { Daily, DailyPayload } from '../types/daily';
 
 export const api = axios.create ({
 
@@ -50,4 +51,11 @@ export const taskService = {
   async deleteAll(): Promise<void> {
     await api.delete('/tasks/all');
   }
+}
+
+export const dailyService = {
+  async create(daily: DailyPayload): Promise<Daily> {
+    const response = await api.post<Daily>('/dailys', daily);
+    return response.data;
+  },
 }

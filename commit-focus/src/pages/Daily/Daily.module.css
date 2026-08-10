@@ -305,3 +305,8 @@
     transform: translateY(2px);
   }
 }
+
+.campoComErro {
+  border-color:  #ef4444 !important;
+  transition: all 0.2s ease-in-out;
+}
