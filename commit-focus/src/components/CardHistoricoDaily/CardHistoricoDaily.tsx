@@ -1,17 +1,46 @@
+import type { Daily } from '../../types/daily';
 import style from './CardHistoricoDaily.module.css';
 
-export function CardHistoricoDaily() {
+interface CardHistoricoProps {
+  daily: Daily;
+  onDelete: () => void;
+}
+
+export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
+
+  function formatarData(dataString: string) {
+    if (!dataString) return 'Data não informada';
+
+    const apenasData = dataString.split('T')[0];
+    const [ano, mes, dia] = apenasData.split('-');
+
+    const data = new Date(Number(ano), Number(mes) - 1, Number(dia));
+
+    if (isNaN(data.getTime())) {
+      return 'Data inválida';
+    }
+
+    const dataFormatada = data.toLocaleDateString('pt-BR', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    return dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+  }
+
   return (
     <div className={style.containerHistorioDaily}>
       <div className={style.containerHeader}>
-        <p>Quinta-Feira, 22 de Junho de 2026</p>
+        <p>{formatarData(daily.dataReferencia)}</p>
         <div className={style.secaoBtn}>
           <button>
             <span className={`material-symbols-outlined ${style.iconeCopiar}`}>content_copy</span>
             Copiar markdown
           </button>
 
-          <span className={`material-symbols-outlined ${style.iconeLixeira}`}>delete</span>
+          <span onClick={onDelete} className={`material-symbols-outlined ${style.iconeLixeira}`}>delete</span>
         </div>
       </div>
 
@@ -20,19 +49,19 @@ export function CardHistoricoDaily() {
           <span className={`material-symbols-outlined ${style.iconeOqueFiz}`}>check_circle</span>
           <label htmlFor="#" className={style.textoOqueFiz}>O que fiz</label>
         </div>
-        <p>Exemplo dp que fiz</p>
+        <p>{daily.oQueFiz}</p>
 
         <div className={style.containerOqueFarei}>
           <span className={`material-symbols-outlined ${style.iconeOqueFarei}`}>rocket_launch</span>
           <label htmlFor="#" className={style.textoOqueFarei}>O que farei</label>
         </div>
-        <p>---</p>
+        <p>{daily.oQueFarei}</p>
 
         <div className={style.containerImpedimentos}>
           <span className={`material-symbols-outlined ${style.iconeImpedimentos}`}>warning</span>
           <label htmlFor="#" className={style.textoImpedimentos}>Impedimentos</label>
         </div>
-        <p>Exemplo de impedimentos</p>
+        <p>{daily.impedimentos}</p>
       </div>
     </div>
   )

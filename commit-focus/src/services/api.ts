@@ -58,4 +58,13 @@ export const dailyService = {
     const response = await api.post<Daily>('/dailys', daily);
     return response.data;
   },
+
+  async getAll(): Promise<Daily[]> {
+    const response = await api.get('/dailys');
+    return response.data;
+  },
+
+  async delete(id: string): Promise<void> {
+    await api.delete(`/dailys/${id}`);
+  }
 }
