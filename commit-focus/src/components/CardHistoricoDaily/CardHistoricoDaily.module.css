@@ -6,6 +6,8 @@
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  text-align: justify;
+  overflow-wrap: break-word;
 }
 
 .containerHeader {
@@ -72,6 +74,7 @@
     color: var(--cor-letra-principal);
     font-size: 14px;
     font-weight: 400;
+    white-space: pre-wrap;
   }
 }
 

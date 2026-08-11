@@ -18,6 +18,15 @@ export function InputAddTarefa({ adicionarTarefa, exibirToast }: InputAddTarefaP
       return;
     }
 
+    if (tarefaTexto.length > 255) {
+      exibirToast(
+        'Texto muito longo',
+        `O limite é 255 caracteres, mas você digitou ${tarefaTexto.length}.`,
+        'erro'
+      );
+      return;
+    }
+
     adicionarTarefa(tarefaTexto);
     setTarefaTexto('');
   }

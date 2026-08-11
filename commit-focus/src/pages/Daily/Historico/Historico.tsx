@@ -45,7 +45,11 @@ export function Historico() {
         {estaCarregando ? (
           <p>Carregando histórico...</p>
         ) : dailys.length === 0 ? (
-          <p>Nenhuma daily registrada ainda. falta desing quando não tiver Dailys</p>
+          <div className={style.containerSemDaily}>
+            <span className={`material-symbols-outlined ${style.iconeSemDaily}`}>article</span>
+            <p>Nenhuma daily registrada ainda.</p>
+          </div>
+          
         ) : (
           dailys.map((daily) => (
             <CardHistoricoDaily

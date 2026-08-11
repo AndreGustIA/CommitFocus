@@ -23,3 +23,26 @@
   flex: 1;
   min-height: 0;
 }
+
+.containerSemDaily {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  .iconeSemDaily {
+    color: var(--cor-icones);
+    font-size: 40px;
+    cursor: default;
+  }
+
+  p {
+    font-family: var(--fonte-principal);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: var(--espaco-entre-texto);
+    color: var(--cor-letra-secundaria);
+  }
+}

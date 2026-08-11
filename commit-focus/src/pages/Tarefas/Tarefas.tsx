@@ -74,6 +74,8 @@ export function Tarefas() {
       setTarefas((prevTarefas) => [...prevTarefas, novaTarefa]);
     } catch (err) {
       console.error('Erro ao adicionar tarefa:', err);
+
+      exibirToast('Erro', 'Não foi possível salvar a tarefa no momento.', 'erro')
     }
   }
 

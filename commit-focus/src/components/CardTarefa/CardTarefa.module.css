@@ -1,9 +1,9 @@
 .containerCard {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 45px;
-  max-height: 45px;
+  align-items: flex-start;
+  height: auto;
+  min-height: 45px;
   padding: 0 15px;
   flex-shrink: 0;
   background-color: var(--cor-bg-secundario);
@@ -13,10 +13,12 @@
 
 .containerCardTarefa {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   cursor: pointer;
   flex: 1;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .checkboxRoot {
@@ -69,6 +71,9 @@
   font-weight: 400;
   font-size: 15px;
   letter-spacing: var(--espaco-entre-texto);
+  flex: 1;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .textoCardTarefaConcluida {
@@ -81,9 +86,8 @@
   background-color: transparent;
   border-radius: var(--bordas-arredondadas);
   outline: none;
-
-  
-  
+  margin-top: 6px;
+  cursor: pointer;
 }
 
 .btnAcaoCardTarefa:hover, .btnAcaoCardTarefa[data-state='open'] {

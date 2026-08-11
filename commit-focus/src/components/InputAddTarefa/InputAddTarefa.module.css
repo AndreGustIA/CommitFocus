@@ -48,6 +48,7 @@
   font-weight: 500;
   color: var(--cor-letra-principal);
   cursor: pointer;
+  outline: none;
 
   &:hover {
     border-color: var(--cor-bordas-hover);
