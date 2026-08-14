@@ -4,6 +4,7 @@ import { MainLayout } from './layout/MainLayout/MainLayout'
 import { Tarefas } from './pages/Tarefas/Tarefas'
 import { Historico } from './pages/Daily/Historico/Historico'
 import { Daily } from './pages/Daily/Daily'
+import { Dashboard } from './pages/Dashboard/Dashboard'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,8 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: '/',
-        element: <div>Página Inicial</div>,
+        path: '/dashboard',
+        element: <Dashboard />,
       },
       {
         path: '/tarefas',

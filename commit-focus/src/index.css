@@ -16,6 +16,17 @@
   --cor-borda-letra-icone-oquefiz: #45BE79;
   --cor-borda-letra-icone-oquefarei: #2A95E3;
   --cor-borda-letra-icone-impedimentos: #F75F4D;
+
+  
+  --cor-carDaily-icone-texto-padrao: #EDEFEE;
+  --bg-cardDaily-icone-padrao: #2B2B2B;
+  --cor-carDaily-icone-texto-verde: #2EC25D;
+  --bg-carDaily-icone-verde: #1F2D23;
+  --cor-carDaily-icone-texto-azul: #2E8DFF;
+  --bg-carDaily-icone-azul: #1F2834;
+  --cor-carDaily-icone-texto-vermelho: #F53F43;
+  --bg-carDaily-icone-vermelho: #322021;
+
 }
 
 [data-theme="light"] {
@@ -32,6 +43,15 @@
   --espaco-entre-texto: 1.2px;
   --fonte-principal: 'Inter', sans-serif;
   --cor-checkbox-checked: #00B168;
+
+  --cor-carDaily-icone-texto-padrao: #1A1A1A;
+  --bg-cardDaily-icone-padrao: #E2E8F0;
+  --cor-carDaily-icone-texto-verde: #2EC25D;
+  --bg-carDaily-icone-verde: rgba(34, 197, 94, 0.15);
+  --cor-carDaily-icone-texto-azul: #2E8DFF;
+  --bg-carDaily-icone-azul: rgba(59, 130, 246, 0.15);
+  --cor-carDaily-icone-texto-vermelho: #F53F43;
+  --bg-carDaily-icone-vermelho: rgba(239, 68, 68, 0.15);
 }
 
 * {

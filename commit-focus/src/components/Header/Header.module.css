@@ -24,6 +24,7 @@
     border: none;
     background-color: transparent;
     border-radius: var(--bordas-arredondadas);
+    outline: none;
 
     &:hover {
       cursor: pointer;
@@ -54,6 +55,7 @@
       font-weight: 500;
       padding: 5px 12px;
       border-radius: var(--bordas-arredondadas-2);
+      outline: none;
 
       &:hover {
         background-color: var(--cor-bg-hover-icone);

@@ -1,11 +1,14 @@
 import style from './MainLayout.module.css';
 import { Header } from "../../components/Header/Header";
 import { useTheme } from '../../hooks/useTheme';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Footer } from '../../components/Footer/Footer';
 
 export function MainLayout() {
   const { tema, alternarTema } = useTheme();
+  const location = useLocation()
+
+  const isDashboard = location.pathname === '/dashboard' || location.pathname === '/';;
 
   return (
     <>
@@ -18,7 +21,7 @@ export function MainLayout() {
           <hr />
           <main className={style.containerMenorLayout}>
             <div className={style.containerPages}>
-              <div className={style.pages}>
+              <div className={isDashboard ? style.pagesDashboard : style.pages}>
                 <Outlet></Outlet>
               </div>  
             </div>

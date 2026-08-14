@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  background-color: var(--cor-bg-secundario);
+  width: 100%;
+  max-width: 264px;
+  height: 100%;
+  max-height: 130px;
+  padding: 20px;
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas);
+  justify-content: space-between;
+}
+
+.iconesDaily {
+  width: fit-content;
+  height: fit-content;
+  padding: 7px;
+  border-radius: var(--bordas-arredondadas);
+  font-size: 24px;
+}
+
+.containerConteudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  span {
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-secundaria);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    h4 {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--cor-letra-secundaria);
+    }
+  }
+}
+
+.valorNumero {
+  font-family: var(--fonte-principal);
+  font-size: 30px !important;
+  font-weight: 400;
+}
+
+.padrao .valorNumero, .padrao .iconesDaily {
+  color: var(--cor-carDaily-icone-texto-padrao);
+}
+
+.padrao .iconesDaily {
+  background-color: var(--bg-cardDaily-icone-padrao);
+}
+
+.verde .valorNumero, .verde .iconesDaily {
+  color: var(--cor-carDaily-icone-texto-verde);
+}
+
+.verde .iconesDaily {
+  background-color: var(--bg-carDaily-icone-verde);
+}
+
+.azul .valorNumero, .azul .iconesDaily {
+  color: var(--cor-carDaily-icone-texto-azul);
+}
+
+.azul .iconesDaily {
+  background: var(--bg-carDaily-icone-azul);
+}
+
+.vermelho .valorNumero, .vermelho .iconesDaily {
+  color: var(--cor-carDaily-icone-texto-vermelho);
+}
+
+.vermelho .iconesDaily {
+  background: var(--bg-carDaily-icone-vermelho);
+}

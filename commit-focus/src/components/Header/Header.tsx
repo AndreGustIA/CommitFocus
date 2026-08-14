@@ -17,10 +17,10 @@ export function Header({ tema, alternarTema }: HeaderProps) {
             <ul>
               <li>
                 <NavLink 
-                  to="/"
+                  to="/dashboard"
                   className={({ isActive }) => isActive ? style.linkAtivo : ''}
                 >
-                Início
+                Dashboard
                 </NavLink>
               </li>
               <li>
