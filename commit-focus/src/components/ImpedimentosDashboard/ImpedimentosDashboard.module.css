@@ -1,0 +1,23 @@
+.containerImpedimentos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--fonte-principal);
+  padding: 13px;
+  background-color: var(--cor-bg-impedimentos-dashboard);
+  border: 1px solid var(--cor-borda-impedimentos-dashboard);
+  border-radius: var(--bordas-arredondadas);
+
+
+  p {
+    color: var(--cor-letra-principal);
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  span {
+    font-size: 12px;
+    color: var(--cor-letra-secundaria);
+    font-weight: 400;
+  }
+}
