@@ -1,0 +1,61 @@
+.containerMiniCardTarefas {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-bg-principal);
+  border: 1px solid var(--cor-bordas-principal);
+  border-radius: var(--bordas-arredondadas);
+  padding: 12px;
+  width: 100%;
+  max-width: 92px;
+  height: 100%;
+  max-height: 114px;
+  
+
+  p {
+    font-family: var(--fonte-principal);
+    color: var(--cor-letra-secundaria);
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+}
+
+.iconesTarefasDash {
+  width: fit-content;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: var(--bordas-arredondadas);
+  background-color: var(--cor-bg-secundario);
+}
+
+.numeroCardTarefas {
+  font-family: var(--fonte-principal);
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 10px;
+  
+}
+
+.padrao .numeroCardTarefas, .padrao .iconesTarefasDash {
+  color: var(--cor-carDaily-icone-texto-padrao);
+}
+
+.padrao .iconesTarefasDash {
+  background-color: var(--bg-cardDaily-icone-padrao);
+}
+
+.azul .numeroCardTarefas, .azul .iconesTarefasDash {
+  color: var(--cor-carDaily-icone-texto-azul);
+}
+
+.azul .iconesTarefasDash {
+  background-color: var(--bg-carDaily-icone-azul);
+}
+
+.verde .numeroCardTarefas, .verde .iconesTarefasDash {
+  color: var(--cor-carDaily-icone-texto-verde);
+}
+
+.verde .iconesTarefasDash {
+  background-color: var(--bg-carDaily-icone-verde);
+}

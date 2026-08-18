@@ -10,7 +10,6 @@ import {
   ReferenceArea
 } from 'recharts';
 
-// --- 1. Interface dos Dados Iniciais ---
 interface ITarefa {
   dia: string;
   data: string;
@@ -29,35 +28,30 @@ const dadosIniciais: ITarefa[] = [
   { dia: 'Ter', data: '11/08', fiz: 5, farei: 3, impedimentos: 1, id: 6 },
 ];
 
-// --- 2. Tipagem Customizada do Tooltip (Resolve os 4 erros) ---
-// Criamos a tipagem exata do que cada item do gráfico tem
 interface IPayloadItem {
   color: string;
   name: string;
   value: number;
-  payload: ITarefa; // Faz referência à interface ITarefa ali de cima
+  payload: ITarefa;
 }
 
-// Criamos a tipagem para as Props do nosso componente CustomTooltip
 interface ICustomTooltipProps {
   active?: boolean;
-  payload?: IPayloadItem[]; // O payload é uma lista de IPayloadItem
+  payload?: IPayloadItem[];
   label?: string;
 }
 
-// --- 3. Componente do Balãozinho ---
 const CustomTooltip = ({ active, payload }: ICustomTooltipProps) => {
   if (active && payload && payload.length) {
-    // Como tipamos o IPayloadItem lá em cima, o TS já sabe que dadosDia tem dia e data
     const dadosDia = payload[0].payload;
     
     return (
       <div style={{
-        backgroundColor: '#1c1c1c',
-        border: '1px solid #333',
+        backgroundColor: 'var(--cor-bg-secundario)',
+        border: '1px solid var(--cor-bordas-principal)',
         padding: '12px',
         borderRadius: '8px',
-        color: '#fff',
+        color: 'var(--cor-letra-principal)',
         boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
         minWidth: '150px'
       }}>
@@ -65,7 +59,7 @@ const CustomTooltip = ({ active, payload }: ICustomTooltipProps) => {
           {`${dadosDia.dia} ${dadosDia.data}`}
         </p>
         
-        {/* O TS agora sabe que 'item' é do tipo IPayloadItem e 'index' é number */}
+        
         {payload.map((item, index) => (
           <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -87,7 +81,6 @@ const CustomTooltip = ({ active, payload }: ICustomTooltipProps) => {
   return null;
 };
 
-// --- 4. Componente Principal ---
 export default function GraficoTarefas() {
   const [dados, setDados] = useState<ITarefa[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -105,17 +98,22 @@ export default function GraficoTarefas() {
     carregarDados();
   }, []);
 
-  if (carregando) return <p style={{ color: '#fff' }}>Carregando gráfico...</p>;
+  if (carregando) return <p style={{ color: 'var(--cor-letra-principal)' }}>Carregando gráfico...</p>;
 
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: '250px', fontFamily: 'var(--fonte-principal)'}}>
+    <div style={{ width: '100%', height: '100%', minHeight: '260px', fontFamily: 'var(--fonte-principal)'}}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={dados}
           margin={{ top: 0, right: 0, left: 0, bottom: 5 }}
           style={{ backgroundColor: 'transparent' }} 
         >
-          <CartesianGrid strokeWidth={1} stroke="var(--cor-bordas-principal)" horizontal={true}  vertical={false}/>
+          <CartesianGrid 
+            strokeWidth={1} 
+            stroke="var(--cor-bordas-principal)" 
+            horizontal={true}  
+            vertical={false}
+          />
           
           <XAxis 
             dataKey="id" 
@@ -136,7 +134,7 @@ export default function GraficoTarefas() {
           
           <Tooltip 
             content={<CustomTooltip />} 
-            cursor={{ fill: '#222222', opacity: 0.7}} 
+            cursor={{ fill: 'var(--cor-hover-grafico-tooltip)', opacity: 0.7}}
           />
 
           <ReferenceArea x1={1} x2={2} fill="transparent" />
