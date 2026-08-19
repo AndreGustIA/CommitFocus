@@ -23,6 +23,10 @@
   }
 }
 
+.modoDashboard {
+  background-color: var(--cor-bg-principal);
+}
+
 .secaoBtn {
   display: flex;
   align-items: center;

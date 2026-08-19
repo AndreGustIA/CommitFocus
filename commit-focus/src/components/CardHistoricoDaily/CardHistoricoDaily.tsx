@@ -4,10 +4,11 @@ import style from './CardHistoricoDaily.module.css';
 
 interface CardHistoricoProps {
   daily: Daily;
-  onDelete: () => void;
+  onDelete?: () => void;
+  modoDashboard?: boolean;
 }
 
-export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
+export function CardHistoricoDaily({ daily, onDelete, modoDashboard = false }: CardHistoricoProps) {
   const [copiado, setCopiado] = useState(false);
 
   function formatarData(dataString: string) {
@@ -62,7 +63,7 @@ export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
   }
 
   return (
-    <div className={style.containerHistorioDaily}>
+    <div className={` ${style.containerHistorioDaily} ${modoDashboard ? style.modoDashboard : ''}`}>
       <div className={style.containerHeader}>
         <p>{formatarData(daily.dataReferencia)}</p>
         <div className={style.secaoBtn}>
@@ -71,7 +72,9 @@ export function CardHistoricoDaily({ daily, onDelete }: CardHistoricoProps) {
             {copiado ? 'Copiado' : 'Copiar markdown'}
           </button>
 
-          <span onClick={onDelete} className={`material-symbols-outlined ${style.iconeLixeira}`}>delete</span>
+          {!modoDashboard && onDelete && (
+            <span onClick={onDelete} className={`material-symbols-outlined ${style.iconeLixeira}`}>delete</span>
+          )}
         </div>
       </div>
 

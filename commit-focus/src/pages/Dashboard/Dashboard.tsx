@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { taskService } from '../../services/api';
+import { taskService, dailyService } from '../../services/api';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CardDashboardDaily } from '../../components/CardDashboardDaily/CardDashboardDaily';
 import GraficoTarefas from '../../components/GraficoTarefas/GraficoTarefas';
@@ -8,23 +8,29 @@ import { ImpedimentosDashboard } from '../../components/ImpedimentosDashboard/Im
 import style from './Dashboard.module.css';
 import { MiniCardTarefasDashboard } from '../../components/MiniCardTarefasDashboard/MiniCardTarefasDashboard';
 import type { Task } from '../../types/task';
+import type { Daily } from '../../types/daily';
+import { CardHistoricoDaily } from '../../components/CardHistoricoDaily/CardHistoricoDaily';
 
 export function Dashboard() {
   const [tarefas, setTarefas] = useState<Task[]>([]);
   const [tarefasSendoConcluidas, setTarefasSendoConcluidas] = useState<string[]>([]);
+  const [dailys, setDailys] = useState<Daily[]>([]);
 
   useEffect(() => {
-    async function carregarTarefas() {
+    async function carregarDados() {
       try {
-        const dados = await taskService.getAll();
-        setTarefas(dados);
+        const dadosTarefas = await taskService.getAll();
+        setTarefas(dadosTarefas);
+
+        const dadosDailys = await dailyService.getAll();
+        setDailys(dadosDailys);
 
       } catch (error) {
-        console.error('Erro ao buscar tarefas para o dashboard', error);
+        console.error('Erro ao buscar dados para o dashboard', error);
       }
     }
 
-    carregarTarefas();
+    carregarDados();
   }, []);
 
   const totalTarefas = tarefas.length;
@@ -36,6 +42,8 @@ export function Dashboard() {
   : Math.round((tarefasConcluidas / totalTarefas) * 100);
 
   const proximasPendentes = tarefas.filter(tarefas => tarefas.status !== 'CONCLUIDA').slice(0, 3);
+
+  const dailyRecentes = dailys.slice(0,3);
 
   async function onToggleTask(id: string, statusAtual: boolean) {
     await taskService.toggleCompletion(id, !statusAtual);
@@ -156,6 +164,23 @@ export function Dashboard() {
             </Link>
           </div>
 
+          <div className={style.listaDeDailysRecentes}>
+            {dailyRecentes.length > 0 ? (
+              dailyRecentes.map(daily => (
+                <CardHistoricoDaily 
+                  key={daily.id}
+                  daily={daily}
+                  modoDashboard={true}
+                />
+              ))
+            ) : (
+              <div className={style.containerSemDailyRegistrada}>
+                <span className={`material-symbols-outlined ${style.iconeSemDailyRecentes}`}>event_busy</span>
+                <p className={style.textoSemDailys}>Nenhuma daily registrada recentemente.</p>
+              </div>  
+            )}
+          </div>
+
         </div>
 
         <div className={style.containerTarefasDashboard}>
@@ -237,7 +262,7 @@ export function Dashboard() {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
 
-                    <span className={`${style.textoTarefaDashboard} ${estaSendoConcluida ? style.textoRiscado : ''} }`}>
+                    <span className={`${style.textoTarefaDashboard} ${estaSendoConcluida ? style.textoRiscado : ''}`}>
                       {tarefa.titulo}
                     </span>
                   </label>
