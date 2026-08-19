@@ -10,23 +10,25 @@ import {
   ReferenceArea
 } from 'recharts';
 
+import { dailyService } from '../../services/api';
+
 interface ITarefa {
   dia: string;
   data: string;
   fiz: number;
   farei: number;
   impedimentos: number;
-  id: number;
+  id: string | number;
 }
 
-const dadosIniciais: ITarefa[] = [
-  { dia: 'Qui', data: '06/08', fiz: 2, farei: 1, impedimentos: 0, id: 1 },
-  { dia: 'Sex', data: '07/08', fiz: 1, farei: 2, impedimentos: 1, id: 2 },
-  { dia: 'Sáb', data: '08/08', fiz: 2, farei: 1, impedimentos: 0, id: 3 },
-  { dia: 'Dom', data: '09/08', fiz: 2, farei: 1, impedimentos: 2, id: 4 },
-  { dia: 'Seg', data: '10/08', fiz: 2, farei: 2, impedimentos: 0, id: 5 },
-  { dia: 'Ter', data: '11/08', fiz: 5, farei: 3, impedimentos: 1, id: 6 },
-];
+// const dadosIniciais: ITarefa[] = [
+//   { dia: 'Qui', data: '06/08', fiz: 2, farei: 1, impedimentos: 0, id: 1 },
+//   { dia: 'Sex', data: '07/08', fiz: 1, farei: 2, impedimentos: 1, id: 2 },
+//   { dia: 'Sáb', data: '08/08', fiz: 2, farei: 1, impedimentos: 0, id: 3 },
+//   { dia: 'Dom', data: '09/08', fiz: 2, farei: 1, impedimentos: 2, id: 4 },
+//   { dia: 'Seg', data: '10/08', fiz: 2, farei: 2, impedimentos: 0, id: 5 },
+//   { dia: 'Ter', data: '11/08', fiz: 5, farei: 3, impedimentos: 1, id: 6 },
+// ];
 
 interface IPayloadItem {
   color: string;
@@ -81,6 +83,11 @@ const CustomTooltip = ({ active, payload }: ICustomTooltipProps) => {
   return null;
 };
 
+function contarItens(texto: string) {
+  if (!texto || texto === 'Nenhum bloqueio') return 0;
+  return texto.split('\n').filter(linha => linha.trim() !== '').length;
+}
+
 export default function GraficoTarefas() {
   const [dados, setDados] = useState<ITarefa[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -88,9 +95,30 @@ export default function GraficoTarefas() {
   useEffect(() => {
     async function carregarDados() {
       try {
-        setDados(dadosIniciais);
+        const dailyDaApi = await dailyService.getAll();
+        const ultimaDailys = dailyDaApi.sort((a, b) => new Date(a.dataReferencia).getTime() - new Date(b.dataReferencia).getTime()).slice(-6);
+
+        const dadosFormatados: ITarefa[] = ultimaDailys.map((daily) => {
+          const apenasData = daily.dataReferencia.split('T')[0];
+          const [ano, mes, dia] = apenasData.split('-');
+          const dataSegura = new Date(Number(ano), Number(mes) - 1, Number(dia));
+
+          const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+          return {
+            id: daily.id,
+            dia: diasDaSemana[dataSegura.getDay()],
+            data: `${dia}/${mes}`,
+            fiz: contarItens(daily.oQueFiz),
+            farei: contarItens(daily.oQueFarei),
+            impedimentos: contarItens(daily.impedimentos)
+          };
+        });
+
+        setDados(dadosFormatados);
+        
       } catch (error) {
-        console.error("Erro ao carregar dados", error);
+        console.error("Erro ao carregar dados do gráfico", error);
       } finally {
         setCarregando(false);
       }
@@ -99,6 +127,13 @@ export default function GraficoTarefas() {
   }, []);
 
   if (carregando) return <p style={{ color: 'var(--cor-letra-principal)' }}>Carregando gráfico...</p>;
+
+  if (dados.length === 0) return <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', height: '100%', justifyContent: 'center'}}>
+    
+    <span className="material-symbols-outlined" style={{fontSize: '30px', color: 'var(--cor-icones)'}}>bar_chart</span>
+
+    <p style={{ fontFamily: 'var(--fonte-principal)', fontSize: '14px', fontWeight: '400' ,color: 'var(--cor-letra-secundaria)', textAlign: 'center'}}>Nenhuma atividade registrada para o gráfico.</p>
+  </div>;
 
   return (
     <div style={{ width: '100%', height: '100%', minHeight: '260px', fontFamily: 'var(--fonte-principal)'}}>
