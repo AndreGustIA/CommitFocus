@@ -11,6 +11,49 @@ import type { Task } from '../../types/task';
 import type { Daily } from '../../types/daily';
 import { CardHistoricoDaily } from '../../components/CardHistoricoDaily/CardHistoricoDaily';
 
+function contarItens(texto: string) {
+  if (!texto || texto === 'Nenhum bloqueio') return 0;
+  return texto.split('\n').filter(linha => linha.trim() !== '').length;
+}
+
+function calcularDiasSeguidos(dailysLista: Daily[]) {
+  if (dailysLista.length === 0) return 0;
+
+  const datasUnicas = [...new Set(dailysLista.map(d => d.dataReferencia.split('T')[0]))];
+
+  let streak = 0;
+
+  const hojeDate = new Date();
+  const hojeStr = `${hojeDate.getFullYear()}-${String(hojeDate.getMonth() + 1).padStart(2, '0')}-${String(hojeDate.getDate()).padStart(2, '0')}`;
+
+  const ontemDate = new Date();
+  ontemDate.setDate(ontemDate.getDate() - 1);
+  const ontemStr = `${ontemDate.getFullYear()}-${String(ontemDate.getMonth() + 1).padStart(2, '0')}-${String(ontemDate.getDate()).padStart(2, '0')}`;
+
+  let dataVerificacao: Date;
+
+  if (datasUnicas.includes(hojeStr)) {
+    dataVerificacao = hojeDate;
+  } else if (datasUnicas.includes(ontemStr)) {
+    dataVerificacao = ontemDate;
+  } else {
+    return 0;
+  }
+
+  while (true) {
+    const dataStr = `${dataVerificacao.getFullYear()}-${String(dataVerificacao.getMonth() + 1).padStart(2, '0')}-${String(dataVerificacao.getDate()).padStart(2, '0')}`;
+    
+    if (datasUnicas.includes(dataStr)) {
+      streak++;
+      dataVerificacao.setDate(dataVerificacao.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
 export function Dashboard() {
   const [tarefas, setTarefas] = useState<Task[]>([]);
   const [tarefasSendoConcluidas, setTarefasSendoConcluidas] = useState<string[]>([]);
@@ -45,6 +88,19 @@ export function Dashboard() {
 
   const dailyRecentes = dailys.slice(0,3);
 
+  const totalDailys = dailys.length;
+  let totalEntregas = 0;
+  let totalPlanejamentos = 0;
+  let totalImpedimentos = 0;
+
+  dailys.forEach(daily => {
+    totalEntregas += contarItens(daily.oQueFiz);
+    totalPlanejamentos += contarItens(daily.oQueFarei);
+    totalImpedimentos += contarItens(daily.impedimentos);
+  });
+
+  const diasSeguidos = calcularDiasSeguidos(dailys);
+
   async function onToggleTask(id: string, statusAtual: boolean) {
     await taskService.toggleCompletion(id, !statusAtual);
     const dadosAtualizado = await taskService.getAll();
@@ -60,6 +116,35 @@ export function Dashboard() {
     }, 500);
   }
 
+  const dailysOrdenadasPorData = [...dailys].sort(
+    (a, b) => new Date(b.dataReferencia).getTime() - new Date(a.dataReferencia).getTime()
+  );
+
+  const listaDeImpedimentos: { id: string; texto: string; dataFormatada: string }[] = [];
+
+  dailysOrdenadasPorData.forEach(daily => {
+    if (daily.impedimentos && daily.impedimentos !== 'Nenhum bloqueio') {
+      
+      const apenasData = daily.dataReferencia.split('T')[0];
+      const [ano, mes, dia] = apenasData.split('-');
+      const dataSegura = new Date(Number(ano), Number(mes) - 1, Number(dia));
+      const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+      const dataFormatada = `${diasDaSemana[dataSegura.getDay()]} ${dia}/${mes}`;
+
+      const linhasImpedimento = daily.impedimentos.split('\n').filter(linha => linha.trim() !== '');
+
+      linhasImpedimento.forEach((linha, index) => {
+        listaDeImpedimentos.push({
+          id: `${daily.id}-${index}`,
+          texto: linha.trim(),
+          dataFormatada: dataFormatada
+        });
+      });
+    }
+  });
+
+  const impedimentosRecentes = listaDeImpedimentos.slice(0, 3);
+
   return (
     <main>
       <div className={style.containerHeader}>
@@ -68,7 +153,9 @@ export function Dashboard() {
           <p>Acompanhe suas métricas de produtividade e consistência.</p>
           <div className={style.contagem}>
             <span className={`material-symbols-outlined ${style.iconeContagem}`}>mode_heat</span>
-            <p className={style.contagemNumero}><span className={style.numeroDestaque}>7</span> dias seguidos</p>
+            <p className={style.contagemNumero}>
+              <span className={style.numeroDestaque}>{diasSeguidos}</span> dias seguidos
+            </p>
           </div>  
         </div>
       </div>
@@ -76,14 +163,14 @@ export function Dashboard() {
       <div className={style.containerCardDaily}>
         <CardDashboardDaily 
           titulo='Dailys registradas'
-          quantidade='6'
+          quantidade={totalDailys.toString()}
           textoInferior='no período'
           icone='event_available'
         />
 
         <CardDashboardDaily 
           titulo='Entregas concluídas'
-          quantidade='11'
+          quantidade={totalEntregas.toString()}
           textoInferior='itens em "O que fiz"'
           icone='check_circle'
           corVariante='verde'
@@ -91,7 +178,7 @@ export function Dashboard() {
 
         <CardDashboardDaily 
           titulo='Planejamentos'
-          quantidade='10'
+          quantidade={totalPlanejamentos.toString()}
           textoInferior='itens em "O que farei"'
           icone='rocket_launch'
           corVariante='azul'
@@ -99,7 +186,7 @@ export function Dashboard() {
 
         <CardDashboardDaily 
           titulo='Impedimentos'
-          quantidade='3'
+          quantidade={totalImpedimentos.toString()}
           textoInferior='bloqueios registrados'
           icone='warning'
           corVariante='vermelho'
@@ -133,20 +220,20 @@ export function Dashboard() {
           </div>
 
           <div className={style.containerCardsImpedimentos}>
-            <ImpedimentosDashboard 
-              textoP='Aguardando acesso ao ambiente de homologação'
-              dataHorario='Seg 10/08'
-            />
-            
-            <ImpedimentosDashboard 
-              textoP='Aguardando acesso ao ambiente de homologação'
-              dataHorario='Seg 10/08'
-            />
-
-            <ImpedimentosDashboard 
-              textoP='Aguardando acesso ao ambiente de homologação'
-              dataHorario='Seg 10/08'
-            />
+            {impedimentosRecentes.length > 0 ? (
+              impedimentosRecentes.map(impedimento => (
+                <ImpedimentosDashboard 
+                  key={impedimento.id}
+                  textoP={impedimento.texto}
+                  dataHorario={impedimento.dataFormatada}
+                />
+              ))
+            ) : (
+              <div className={style.semImpedimentos}>
+                <span className={`material-symbols-outlined ${style.iconeSemImpedimentos}`}>task_alt</span>
+                <p>Caminho livre! Nenhum impedimento recente.</p>
+              </div>
+            )}
           </div>
           
         </div>

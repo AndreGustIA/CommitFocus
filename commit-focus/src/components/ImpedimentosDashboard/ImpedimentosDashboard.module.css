@@ -1,12 +1,14 @@
 .containerImpedimentos {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
   font-family: var(--fonte-principal);
   padding: 13px;
   background-color: var(--cor-bg-impedimentos-dashboard);
   border: 1px solid var(--cor-borda-impedimentos-dashboard);
   border-radius: var(--bordas-arredondadas);
+  width: 100%;
+  height: 100%;
 
 
   p {
