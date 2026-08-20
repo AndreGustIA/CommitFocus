@@ -203,6 +203,7 @@
       justify-content: center;
       gap: 10px;
       text-align: center;
+      height: 100%;
 
       .iconeSemImpedimentos {
         font-size: 30px;

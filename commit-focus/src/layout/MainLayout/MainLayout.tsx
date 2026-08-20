@@ -8,12 +8,12 @@ export function MainLayout() {
   const { tema, alternarTema } = useTheme();
   const location = useLocation()
 
-  const isDashboard = location.pathname === '/dashboard' || location.pathname === '/';;
+  const isDashboard = location.pathname === '/dashboard' || location.pathname === '/';
 
   return (
     <>
       <div className={style.containerMain}>
-        <div className={style.containerLayout}>
+        <div className={isDashboard ? style.containerLayoutDashboard : style.containerLayout}>
           <Header
             tema={tema}
             alternarTema={alternarTema}
