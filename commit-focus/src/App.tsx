@@ -1,6 +1,7 @@
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import { MainLayout } from './layout/MainLayout/MainLayout'
+import { LandingPage } from './pages/LandingPage/LandingPage'
 import { Tarefas } from './pages/Tarefas/Tarefas'
 import { Historico } from './pages/Daily/Historico/Historico'
 import { Daily } from './pages/Daily/Daily'
@@ -9,12 +10,14 @@ import { Dashboard } from './pages/Dashboard/Dashboard'
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <LandingPage />,
+
+    // Colocar o LOGIN e CADASTRO aqui
+  },
+
+  {
     element: <MainLayout />,
     children: [
-      {
-        index: true,
-        element: <Navigate to="/dashboard" replace/>
-      },
       {
         path: '/dashboard',
         element: <Dashboard />,

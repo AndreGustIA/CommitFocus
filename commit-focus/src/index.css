@@ -13,6 +13,9 @@
   --fonte-principal: 'Inter', sans-serif;
   --cor-checkbox-checked: #00B168;
 
+  --cor-bg-botao-branco: #E4E4E4;
+  --cor-texto-preto-botao: #0F0F0F;
+
   --cor-bg-impedimentos-dashboard: #281F1F;
   --cor-borda-impedimentos-dashboard: #5B2728;
 
@@ -76,4 +79,17 @@ body {
   background-color: var(--cor-bg-principal);
   color: var(--cor-letra-principal);
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Esconde a barra de rolagem principal no Chrome, Edge, Safari e Brave */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Esconde a barra de rolagem principal no Firefox e IE */
+html, body, #root {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
