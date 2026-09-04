@@ -1,5 +1,8 @@
 import style from './LandingPage.module.css';
 import imgDashboard from '../../assets/images/img-dashboard.png';
+import imgDaily from '../../assets/images/img-daily.png';
+import imgTarefas from '../../assets/images/img-tarefas.png'
+import { CardImagemLanding } from '../../components/CardImagemLanding/CardImagemLanding';
 
 export function LandingPage() {
   return (
@@ -63,6 +66,69 @@ export function LandingPage() {
                 <img className={style.imgDashboard} src={imgDashboard} alt="Imagem da dashboard do CommitFocus" />
               </div>
             </div>
+          </section>
+
+          <section>
+            <div className={style.containerFluxo}>
+              <span className={style.tagFraseSimples}>Um fluxo simples</span>
+              <h1>Seu trabalho, sem ruído</h1>
+
+              <div className={style.containerCards}>
+                <div className={style.containerCardsFluxo}>
+                  <span className={`material-symbols-outlined ${style.iconeCheck}`}>check_circle</span>
+                  <h4>Registre o que entregou</h4>
+                  <p>Chega de reuniões diárias perdidas tentando lembrar o que você fez ontem. Registre em segundos e tenha tudo pronto.</p>
+                </div>
+
+                <div className={style.containerCardsFluxo}>
+                  <span className={`material-symbols-outlined ${style.iconeRocket}`}>rocket_launch</span>
+                  <h4>Planeja o próximo passo</h4>
+                  <p>Mantenha as tarefas visíveis, priorizadas e prontas para executar.</p>
+                </div>
+
+                <div className={style.containerCardsFluxo}>
+                  <span className={`material-symbols-outlined ${style.iconeWarning}`}>warning</span>
+                  <h4>Bloqueios visíveis</h4>
+                  <p>Identifique impedimentos no momento em que eles acontecem para que nada trave suas entregas.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={style.containerConsistencia}>
+              <span className={style.tagFraseSimples}>Feito para Consistência</span>
+              <h1>A cadência que transforma <br /> atividade em progresso.</h1>
+
+              <CardImagemLanding 
+                fraseUppercase="METODLOGIA ÁGIL"
+                titulo="O formato clássico que você já conhece, sem complicação"
+                descricao="Três blocos pensados exatamente para o fluxo de desenvolvimento: registre o que foi concluído, defina as metas do próximo ciclo e aponte impedimentos de forma direta."
+                imagem={imgDaily}
+              />
+
+              <CardImagemLanding
+                fraseUppercase='Foco e execução'
+                titulo='Uma lista de afazeres rápida, sem distrações'
+                descricao='Adicione tarefas com um clique, filtre pelo que está pendente ou concluído e mantenha a cabeça focada no código, não na burocracia do gerenciador.'
+                imagem={imgTarefas}
+              />
+
+              <CardImagemLanding 
+                fraseUppercase='Visão geral'
+                titulo='Métricas reais para acompanhar seu ritmo'
+                descricao='Visualize sua taxa de conclusão, gráfico de atividade por dia e histórico de impedimentos em um único painel escuro e confortável.'
+                imagem={imgDashboard}
+              />
+            </div>
+          </section>
+
+          <section className={style.secaoFinalLanding}>
+            <div className={style.containerFinalLanding}>
+              <span className={style.tagFinal}>Proto para focar?</span>
+              <h1>Comece cada dia sabendo exatamente <br /> o que importa.</h1>
+            </div>
+            <a className={style.btnFinal} href="#">Entrar no CommitFocus
+              <span className={`material-symbols-outlined ${style.setaDireita}`}>arrow_forward</span>
+            </a>
           </section>
         </main>
         
