@@ -284,6 +284,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
   margin-top: 82px;
 
   h1 {
@@ -293,6 +295,10 @@
     color: var(--cor-letra-principal);
     margin-top: 16px;
   }
+}
+
+.cardMeio {
+  margin-left: auto;
 }
 
 .tagFraseSimples {
@@ -353,5 +359,81 @@
     color: var(--cor-texto-preto-botao);
     background-color: var(--cor-bg-botao-branco);
     border-radius: var(--bordas-arredondadas);
+
+    &:active {
+      transform: translateY(2px);
+    }
+
+    &:hover {
+      box-shadow: 0px 0px 10px 3px rgb(84, 84, 84);
+    }
   }
+}
+
+.footerLanding {
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+  border-top: 1px solid var(--cor-bordas-principal);
+  margin-top: 40px;
+  
+
+  .containerTopoFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h4 {
+      font-family: var(--fonte-principal);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cor-letra-principal);
+    }
+
+    span {
+      font-family: var(--fonte-principal);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--cor-letra-secundaria);
+    }
+  }
+
+  .containerDireitosFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+
+    p {
+      font-family: var(--fonte-principal);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--cor-letra-secundaria);
+    }
+  }
+
+  .textoFinalFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 100%;
+    overflow: hidden;
+    max-height: 159px;
+    margin-top: 25px;
+
+    h1 {
+      margin-bottom: -60px;
+      color: transparent;
+      font-family: var(--fonte-principal);
+      font-size: 163px;
+      letter-spacing: 2px;
+      background: linear-gradient(to bottom, var(--cor-letra-principal) 25%, var(--cor-bg-principal) 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+    }
+  }
+  
 }

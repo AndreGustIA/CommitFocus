@@ -106,6 +106,7 @@ export function LandingPage() {
               />
 
               <CardImagemLanding
+                className={style.cardMeio}
                 fraseUppercase='Foco e execução'
                 titulo='Uma lista de afazeres rápida, sem distrações'
                 descricao='Adicione tarefas com um clique, filtre pelo que está pendente ou concluído e mantenha a cabeça focada no código, não na burocracia do gerenciador.'
@@ -131,6 +132,22 @@ export function LandingPage() {
             </a>
           </section>
         </main>
+
+        <footer className={style.footerLanding}>
+          <div className={style.containerTopoFooter}>
+            <h4>CommitFocus</h4>
+            <span>daily + tarefas, em foco.</span>
+          </div>
+          <div className={style.containerDireitosFooter}>
+            <p>organização diária e consistência para desenvolvedores.</p>
+
+            <p>&copy; 2026 Copyright. Todos os direitos reservados.</p>
+          </div>
+
+          <div className={style.textoFinalFooter}>
+            <h1>CommitFocus</h1>
+          </div>
+        </footer>
         
       </div>
     </div>

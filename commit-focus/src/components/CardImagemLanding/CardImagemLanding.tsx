@@ -2,15 +2,16 @@ import style from './CardImagemLanding.module.css';
 
 
 interface CardImagemLandingProps {
+  className?: string;
   fraseUppercase: string;
   titulo: string;
   descricao: string;
   imagem?: string;
 }
 
-export function CardImagemLanding({ fraseUppercase, titulo, descricao, imagem }: CardImagemLandingProps) {
+export function CardImagemLanding({ className= '', fraseUppercase, titulo, descricao, imagem }: CardImagemLandingProps) {
   return (
-    <div className={style.cardImagemLanding}>
+    <div className={`${style.cardImagemLanding} ${className}`}>
       <span className={style.fraseUppercase}>{fraseUppercase}</span>
       <div className={style.containerContent}>
         <div className={style.textos}>
