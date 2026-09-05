@@ -1,0 +1,207 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  justify-content: center;
+  gap: 30px;
+
+  .loginHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    h3 {
+      font-size: 24px;
+      font-family: var(--fonte-principal);
+      font-weight: 600;
+      letter-spacing: var(--espaco-entre-texto);
+      color: var(--cor-letra-principal);
+    }
+
+    p {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: var(--espaco-entre-texto);
+      color: var(--cor-letra-secundaria);
+    }
+  }
+
+  .loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .loginInputContainer {
+      position: relative;
+
+      .loginInput {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-height: 40px;
+        padding: 10px;
+        font-family: var(--fonte-principal);
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--cor-letra-secundaria);
+        border: 1px solid var(--cor-bordas-principal);
+        border-radius: var(--bordas-arredondadas);
+        outline: none;
+        background-color: transparent;
+
+        &:focus {
+          border-color: var(--cor-bordas-hover);
+          border: 1.5px solid;
+        }
+      }
+
+      .loginLabel {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: var(--fonte-principal);
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--cor-letra-secundaria);
+        letter-spacing: var(--espaco-entre-texto);
+        pointer-events: none;
+        transition: all 0.2s ease;
+      }
+
+      .loginInput:focus + .loginLabel,
+      .loginInput:not(:placeholder-shown) + .loginLabel {
+        background-color: var(--cor-bg-principal);
+        padding: 4px;
+        top: -15px;
+        font-size: 12px;
+        color: var(--cor-letra-principal);
+      }
+
+      .toggleOlhoPassword {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: var(--cor-icones);
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          color: var(--cor-letra-principal);
+        }
+      }
+    }
+
+    .loginBtn {
+      padding: 10px 0;
+      font-family: var(--fonte-principal);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cor-texto-preto-botao);
+      background-color: var(--cor-bg-botao-branco);
+      border-radius: var(--bordas-arredondadas);
+      border: none;
+      cursor: pointer;
+
+      &:active {
+        transform: translateY(2px);
+      }
+
+      &:hover {
+        box-shadow: 0px 0px 10px 3px rgb(84, 84, 84);
+      }
+    }
+  }
+
+  .divisorLogin {
+    display: flex;
+    align-items: center;
+    color: var(--cor-letra-secundaria);
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .divisorLogin::before,
+  .divisorLogin::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--cor-bordas-principal);
+  }
+
+  .divisorLogin::before {
+    margin-right: 15px;
+  }
+  
+  .divisorLogin::after {
+    margin-left: 15px;
+  }
+
+  .socialLogin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background-color: transparent;
+      border: 1px solid var(--cor-bordas-principal);
+      border-radius: var(--bordas-arredondadas);
+      padding: 8px;
+      width: 100%;
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cor-letra-principal);
+      cursor: pointer;
+
+      &:hover {
+        border-color: var(--cor-bordas-hover);
+      }
+      
+    }
+  }
+
+  .loginFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+
+    span {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cor-letra-principal);
+      cursor: pointer;
+    }
+
+    p {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cor-letra-secundaria);
+
+      a {
+        text-decoration: none;
+        color: var(--cor-letra-principal);
+        cursor: pointer;
+      }
+    }
+  }
+}

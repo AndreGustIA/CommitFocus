@@ -6,13 +6,23 @@ import { Tarefas } from './pages/Tarefas/Tarefas'
 import { Historico } from './pages/Daily/Historico/Historico'
 import { Daily } from './pages/Daily/Daily'
 import { Dashboard } from './pages/Dashboard/Dashboard'
+import { Login } from './pages/Login/Login'
+import { Cadastro } from './pages/Cadastro/Cadastro'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LandingPage />,
+  },
 
-    // Colocar o LOGIN e CADASTRO aqui
+  {
+    path: '/login',
+    element: <Login />,
+  },
+
+  {
+    path: '/cadastro',
+    element: <Cadastro />
   },
 
   {

@@ -1,0 +1,203 @@
+.cadastroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+}
+
+.cadastroForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  gap: 30px;
+
+  .cadastroHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+
+    h3 {
+      font-family: var(--fonte-principal);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--cor-letra-principal);
+      letter-spacing: var(--espaco-entre-texto);
+    }
+
+    p {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: var(--espaco-entre-texto);
+      color: var(--cor-letra-secundaria);
+    }
+  }
+
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .inputGroup {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .inputContainer {
+      position: relative;
+
+      .inputCadastro {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-height: 40px;
+        padding: 10px;
+        font-family: var(--fonte-principal);
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--cor-letra-secundaria);
+        border: 1px solid var(--cor-bordas-principal);
+        border-radius: var(--bordas-arredondadas);
+        outline: none;
+        background-color: transparent;
+
+        &:focus {
+          border-color: var(--cor-bordas-hover);
+          border: 1.5px solid;
+        }
+      }
+
+      .labelCadastro {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: var(--fonte-principal);
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--cor-letra-secundaria);
+        letter-spacing: var(--espaco-entre-texto);
+        pointer-events: none;
+        transition: all 0.2s ease;
+      }
+
+      .inputCadastro:focus + .labelCadastro,
+      .inputCadastro:not(:placeholder-shown) + .labelCadastro {
+        background-color: var(--cor-bg-principal);
+        padding: 4px;
+        top: -15px;
+        font-size: 12px;
+        color: var(--cor-letra-principal);
+      }
+
+      .toggleOlhoPassword {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: var(--cor-icones);
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          color: var(--cor-letra-principal);
+        }
+      }
+    }
+
+    .btnCadastro {
+      padding: 10px 0;
+      font-family: var(--fonte-principal);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cor-texto-preto-botao);
+      background-color: var(--cor-bg-botao-branco);
+      border-radius: var(--bordas-arredondadas);
+      border: none;
+      cursor: pointer;
+
+      &:active {
+        transform: translateY(2px);
+      }
+
+      &:hover {
+        box-shadow: 0px 0px 10px 3px rgb(84, 84, 84);
+      }
+    }
+
+    .divisorCadastro {
+      display: flex;
+      align-items: center;
+      color: var(--cor-letra-secundaria);
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .divisorCadastro::before,
+    .divisorCadastro::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid var(--cor-bordas-principal);
+    }
+
+    .divisorCadastro::before {
+      margin-right: 15px;
+    }
+    
+    .divisorCadastro::after {
+      margin-left: 15px;
+    }
+
+    .socialCadastro {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+
+      button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        background-color: transparent;
+        border: 1px solid var(--cor-bordas-principal);
+        border-radius: var(--bordas-arredondadas);
+        padding: 8px;
+        width: 100%;
+        font-family: var(--fonte-principal);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--cor-letra-principal);
+        cursor: pointer;
+
+        &:hover {
+          border-color: var(--cor-bordas-hover);
+        }
+        
+      }
+    }
+
+    .finalCadastro {
+      font-family: var(--fonte-principal);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--cor-letra-secundaria);
+      margin-top: 24px;
+
+      a {
+        text-decoration: none;
+        color: var(--cor-letra-principal);
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+}
